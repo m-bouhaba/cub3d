@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_in_window2.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sel-ouaf <sel-ouaf@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mannahri <mannahri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 23:13:14 by mbouhaba          #+#    #+#             */
-/*   Updated: 2023/01/17 01:14:49 by sel-ouaf         ###   ########.fr       */
+/*   Updated: 2026/01/05 15:07:09 by mannahri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,14 @@ void	move_player2(int key, t_cub *player)
 	int	angle;
 
 	angle = 0;
-	if (key == 2)
+	/* X11 keycodes on Linux: D=100, A=97, W=119, S=115 */
+	if (key == 100)
 		angle = 90;
-	else if (key == 0)
+	else if (key == 97)
 		angle = -90;
-	else if (key == 13)
+	else if (key == 119)
 		angle = 0;
-	else if (key == 1)
+	else if (key == 115)
 		angle = 180;
 	if (player->map[(int)(player->y
 			+ sin(((player->alpha + angle) * PI)
@@ -38,24 +39,27 @@ void	move_player2(int key, t_cub *player)
 
 int	mouve_player(int key, t_cub *player)
 {
-	if (key == 53)
+	/* ESC on X11 is 65307 */
+	if (key == 65307)
 	{
 		printf("\033[4;33m");
 		printf("GAME HAS BEEN ENDED\n");
 		exit(0);
 	}
-	if (key == 2 || key == 0 || key == 13 || key == 1)
+	if (key == 100 || key == 97 || key == 119 || key == 115)
 		move_player2(key, player);
-	if (key == 124)
+	/* Left/Right arrow keys on X11 */
+	if (key == 65363)
 		player->alpha += 5;
-	if (key == 123)
+	if (key == 65361)
 		player->alpha -= 5;
 	draw_images(player);
 	return (0);
 }
 
-int	exit_win(void)
+int	exit_win(void *param)
 {
+	(void)param;
 	printf("\033[4;33m");
 	printf("GAME HAS BEEN ENDED\n");
 	exit(1);
@@ -73,7 +77,9 @@ void	print_in_window(t_var *data, t_paths *path, t_cub *var)
 	var->path = path;
 	var->var = data;
 	draw_images(var);
-	mlx_hook(var->mlx_win, 2, 0, mouve_player, var);
-	mlx_hook(var->mlx_win, 17, 0L << 2, exit_win, &var);
+	/* use mlx_key_hook for key press events (portable across MinilibX variants) */
+	mlx_key_hook(var->mlx_win, mouve_player, var);
+	/* destroy (window close) event */
+	mlx_hook(var->mlx_win, 17, 0L, exit_win, var);
 	mlx_loop(var->mlx_ptr);
 }
