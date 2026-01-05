@@ -7,12 +7,20 @@ SRC = main.c libft.c libft_2.c libft_3.c get_next_line.c parsing1.c parsing2.c \
 	./parsing/map_check.c ./parsing/path_check.c ./parsing/rgb_tools.c
 cub3d = cub3d
 SANITIZE = -g -fsanitize=address
-FLAGS = -lmlx -lX11 -lXext -lm -lpthread -ldl -Wall -Wextra -Werror $(SANITIZE)
+
+# Allow per-machine MinilibX installs. Example:
+# make INC_DIR=$HOME/local/include LIB_DIR=$HOME/local/lib
+INC_DIR ?= /usr/local/include
+LIB_DIR ?= /usr/local/lib
+
+# Compiler and linker flags. Use CFLAGS when compiling, LDFLAGS when linking.
 CC = cc
+CFLAGS ?= -Wall -Wextra -I$(INC_DIR) $(SANITIZE)
+LDFLAGS ?= -L$(LIB_DIR) -lmlx -lX11 -lXext -lm -lpthread -ldl
 
 all : cub3d
 $(cub3d): $(SRC)
-	@$(CC) $(SRC) $(FLAGS) -o $(cub3d)
+	@$(CC) $(CFLAGS) $(SRC) $(LDFLAGS) -o $(cub3d)
 	@tput setaf 2; echo "cub3d IS READY"
 
 clean :
