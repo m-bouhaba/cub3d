@@ -1,1 +1,2 @@
+videos/*.webm filter=lfs diff=lfs merge=lfs -text
 videos/last-one.webm filter=lfs diff=lfs merge=lfs -text
