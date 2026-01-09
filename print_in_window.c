@@ -6,7 +6,7 @@
 /*   By: mannahri <mannahri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 18:07:25 by sel-ouaf          #+#    #+#             */
-/*   Updated: 2026/01/09 11:01:08 by mannahri         ###   ########.fr       */
+/*   Updated: 2026/01/09 12:26:40 by mannahri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,11 +68,11 @@ void	my_mlx_pixel_put(t_cub *data, int x, int y, int color)
 
 void	xpm_files(t_var *data, t_paths *path, t_cub *cub)
 {
-	printf("Loading textures:\n");
-	printf(" NO: %s\n", data->no);
-	printf(" SO: %s\n", data->so);
-	printf(" WE: %s\n", data->we);
-	printf(" EA: %s\n", data->ea);
+	// printf("Loading textures:\n");
+	// printf(" NO: %s\n", data->no);
+	// printf(" SO: %s\n", data->so);
+	// printf(" WE: %s\n", data->we);
+	// printf(" EA: %s\n", data->ea);
 
 	path->no.xpm_file = mlx_xpm_file_to_image(cub->mlx_ptr,
 			data->no, &path->no.img_w, &path->no.img_h);
@@ -87,9 +87,9 @@ void	xpm_files(t_var *data, t_paths *path, t_cub *cub)
 void	get_addr_textures(t_var *data, t_paths *path, t_cub *cub)
 {
 	xpm_files(data, path, cub);
-	printf("xpm_file pointers: no=%p so=%p we=%p ea=%p\n",
-		path->no.xpm_file, path->so.xpm_file, path->we.xpm_file,
-		path->ea.xpm_file);
+	// printf("xpm_file pointers: no=%p so=%p we=%p ea=%p\n",
+	// 	path->no.xpm_file, path->so.xpm_file, path->we.xpm_file,
+	// 	path->ea.xpm_file);
 	if (!path->no.xpm_file || !path->so.xpm_file \
 	|| !path->we.xpm_file || !path->ea.xpm_file)
 	{

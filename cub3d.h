@@ -6,7 +6,7 @@
 /*   By: mannahri <mannahri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 00:26:01 by sel-ouaf          #+#    #+#             */
-/*   Updated: 2026/01/05 13:47:36 by mannahri         ###   ########.fr       */
+/*   Updated: 2026/01/09 12:43:17 by mannahri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,8 +83,16 @@ typedef struct s_cub
 {
 	int		count_line_in_map;
 	float	new_angle;
+	/* keyboard state for continuous movement */
+	int     key_w;
+	int     key_a;
+	int     key_s;
+	int     key_d;
+	int     key_left;
+	int     key_right;
 	char	**map;
 	void	*mlx_ptr;
+
 	void	*mlx_win;
 	int		width;
 	int		height;
@@ -115,6 +123,11 @@ typedef struct s_cub
 	float	xinc;
 	float	yinc;
 }	t_cub;
+
+/* continuous input handlers */
+int     key_press(int key, t_cub *player);
+int     key_release(int key, t_cub *player);
+int     loop_hook(t_cub *player);
 
 /*check_map*/
 int		check_extention(char *str);

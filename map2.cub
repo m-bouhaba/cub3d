@@ -1,13 +1,9 @@
-SO         ./wall1.xpm
-
-NO ./earth.xpm
-
-WE ./fire.xpm
-
-EA ./water.xpm
-  F 25,10,13
-
-C 240,156,90
+SO ./pics/Ginko.xpm
+WE ./pics/Dressing-Unit.xpm
+NO ./pics/Lotus-Texture.xpm
+EA ./pics/Wallpaper-Designs-For-Walls.xpm
+      C  135,206,235
+       F    201,191,185
 
         1111111111111111111111111
         1100000000011000000000001
